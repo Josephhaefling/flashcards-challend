@@ -5,32 +5,39 @@ const FlashCard = (cardQuestion) => {
 // Flash cards at minimum will have: a category, a question and an answer
 // Clicking on the flash card reveals the answer
 // The user is then prompted whether or not their answer was correct.  
-// After the user answers the next random flash card is displayed.
-  const [userAnswer, setUserAnswer] = useState('');
-  const { answer, category, question } = cardQuestion;
+  // const [userAnswer, setUserAnswer] = useState('');
+  //Set on Submit
+  // const [correct, setCorrect] = useEffect();
+  // const [questionAnswered, setQuestionAnswered] = useState(false);
+  // const { answer, category, question } = cardQuestion;
 
-  const onSubmit = (e) => {
-    return answer === e.target.value
-  };
+//Evaluates the answer
+  // const onSubmit = (e) => {
+  //   setQuestionAnswered(true)
+  //   return e.target.value.contains(answer)
+  // };
+
   //Todo rename this to something more descriptive
-  const onChange = (e) => {
-    const value = e.target.value
-    setUserAnswer(value)
-  }
+  // const onChange = (e) => {
+  //   const value = e.target.value
+  //   setUserAnswer(value)
+  // }
 
   return (
     <div>
-      <div id="CardBody">
+      {/* <div id="CardBody">
         <form>
           <Question question={question}/>
           <AnswerInput question={question} onChange={onChange} />
         </form>
       </div>
-      <div id="CardFooter">
-        {
+      <div id="CardFooter"> */}
+        {/* {
+          questionAnswered ?
+          // <div>result of answer</div>
           // <SubmitButton onSubmit={onSubmit}/>
-        }
-      </div>
+        } */}
+      {/* </div> */}
     </div>
   )
 };
