@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import AnswerInput from '../answer-input/answer-input.component';
+import Question from '../question/question.component';
 const FlashCard = (cardQuestion) => {
 // Flash cards at minimum will have: a category, a question and an answer
 // Clicking on the flash card reveals the answer
@@ -21,9 +22,7 @@ const FlashCard = (cardQuestion) => {
     <div>
       <div id="CardBody">
         <form>
-          <label for={question}>
-            {question}
-          </label>
+          <Question question={question}/>
           <AnswerInput question={question} onChange={onChange} />
         </form>
       </div>
@@ -34,6 +33,6 @@ const FlashCard = (cardQuestion) => {
       </div>
     </div>
   )
-}
+};
 
-export default Card;
+export default FlashCard;
