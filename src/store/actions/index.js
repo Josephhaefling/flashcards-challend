@@ -19,6 +19,18 @@ export const setCurrentQuestion = question => {
   })
 }
 
+export const addCorrectAnswer = correctAnswer => {
+  return ({
+  type: 'ADD_CORRECT_ANSWER',
+  correctAnswer
+})}
+
+// export const updateCorrectAnswers = () => {
+//   return ({
+//     type: 'SET_CURRENT_QUESTION',
+//   })
+// }
+
 export const addRound = currentRound => ({
   type: 'ADD_ROUND',
   currentRound
@@ -30,8 +42,3 @@ export const addCategory = currentCategory => {
   currentCategory
 })}
 
-export const addCorrectAnswer = currentRound => {
-  return ({
-  type: 'ADD_CORRECT_ANSWER',
-  currentRound
-})}

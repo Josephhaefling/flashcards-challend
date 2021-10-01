@@ -23,9 +23,8 @@ const Game = () => {
   const state = store.getState().appState
 
   const setCurrenctQuestion = () => {
-    if (state.questions.length > 0) {
+    if (state.questions) {
       const question = state.questions.pop();
-      console.log({ question, state: state.questions });
       dispatch(updateQuestions(state.questions, addData));
       dispatch(setCurrentQuestion(question, addData));
     }
@@ -44,9 +43,10 @@ const Game = () => {
   };
   
   useEffect(() => {
-    const category = getRandomCategory();
-    createQuestions(category, 5);
-    setCurrenctQuestion();
+    console.log('render ran in game')
+      const category = getRandomCategory();
+      createQuestions(category, 5);
+      // setCurrenctQuestion();
   }, [])
 
   return (

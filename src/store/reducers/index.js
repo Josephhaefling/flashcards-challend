@@ -20,6 +20,19 @@ const appState = (state = game, action) => {
         currentQuestion: action.question
       }
     }
+
+    case 'ADD_CORRECT_ANSWER': {
+      return {
+        correctAnswers: action.correctAnswer
+      }
+    }
+
+    // case 'UPDATE_CORRECT_ANSWERS':{
+    //   return {
+    //     ...state, 
+    //     correctAnswers: state.correctAnswers += 1
+    //   }
+    // }
     case 'ADD_ROUND': {
       return {
         ...state, 
@@ -31,11 +44,7 @@ const appState = (state = game, action) => {
         currentRound: action.currentCategory
       }
     }
-    case 'ADD_CORRECT_ANSWER': {
-      return {
-        currentRound: state.currentRound = action.currentRound
-      }
-    }
+    
     default: {
       return state
     }
