@@ -8,12 +8,6 @@ import { store } from '../../store';
 import { useDispatch } from "react-redux";
 import addData from '../../store/reducers/index'
 import { addQuestion, updateQuestions, setCurrentQuestion } from '../../store/actions/index';
-// import Round from '../round/round.component';
-// import { addCorrectAnswer} from '../../store/actions/index';
-// import ShortId from 'shortid';
-// import { getQuestions } from '../../api/index';
-
-
 
 const Game = () => {
   // Your application should display a random question as a flash card - planned
@@ -43,7 +37,7 @@ const Game = () => {
   };
   
   useEffect(() => {
-    if (!state.questions) {
+    if (!state.questions || isEmpty(state.questions)) {
       const category = getRandomCategory();
       createQuestions(category, 5);
     }

@@ -27,10 +27,11 @@ export const getRandomCategory = () => {
 
   export const adjustQuestionData = (question) => {
     if (question) {
+      question.answerCorrect = false;
+      question.displayAnswer = false;
       question.id = ShortId.generate();
       question.isComplete = false;
       question.value = 1;
-      question.answerCorrect = false;
       return question
     }
   };

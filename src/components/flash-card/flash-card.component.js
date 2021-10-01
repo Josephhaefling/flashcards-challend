@@ -13,48 +13,38 @@ import Question from '../question/question.component';
 import { useDispatch } from "react-redux";
 import addData from '../../store/reducers/index'
 import { addQuestion} from '../../store/actions/index';
-import { addCorrectAnswer, addPreviousQuestion } from '../../store/actions/index';
+import { 
+  addCorrectAnswer, 
+  addPreviousQuestion, 
+  setCurrentQuestion 
+} from '../../store/actions/index';
 import { getQuestions } from '../../api/index';
-
 
 const FlashCard = ({ question }) => {
   const dispatch = useDispatch();
-
   const state = store.getState().appState
 
-  const [userAnswer, setUserAnswer] = useState('')
-  // move current question to previous question
-  //refresh game so that a new question is displayed 
-const createForm  = () => {
-  return (
-  <form  onSubmit={(e) => onSubmit(e)}>
-      <div id="question-container">
-        <Question question={question.question} />
-      </div>
-      <div>
-        <AnswerInput onChange={onChange} />
-      </div>
-      <div>
-        <button>Submit</button>
-      </div>
-    </form>
-  )
-};
-//Evaluates the answer
+  const [correctAnswer, setCorrectAnswer] = useState(false)
+
+//Evaluates the answer, updates score, and clears current question
   const onSubmit = (e) => {
     e.preventDefault()
-    if (userAnswer.includes(question.answer)) {
-      console.log('on submit ran', question.value)
-      dispatch(addCorrectAnswer(question.value, addData))
-      dispatch(addPreviousQuestion([question, ...state.previousQuestions], addData))
+    if (correctAnswer) {
+      console.log('log in onSubmit')
+      question.isCorrect = true;
+      dispatch(addCorrectAnswer(question.value, addData));
     } 
-    // return e.target.value.contains(answer)
+    dispatch(addPreviousQuestion([question, ...state.previousQuestions], addData));
+    dispatch(setCurrentQuestion({}, addData));
   };
 
-  // Todo rename this to something more descriptive
-  const onChange = (e) => {
-    const value = e.target.value
-    setUserAnswer(value)
+  const updateCorrectAnswer = () => {
+    setCorrectAnswer(true)
+  }
+
+  const displayAnswer = () => {
+    question.displayAnswer = true;
+    dispatch(setCurrentQuestion(question, addData));
   }
 
   useEffect(() => {
@@ -63,19 +53,25 @@ const createForm  = () => {
     // }
   }, [question]);
 
-  console.log(state)
+  console.log(question)
   return (
-    <form  onSubmit={(e) => onSubmit(e)}>
-      <div id="question-container">
-        <Question question={question.question} />
-      </div>
-      <div>
-        <AnswerInput onChange={onChange} />
-      </div>
-      <div>
-        <button>Submit</button>
-      </div>
-    </form>
+    <div id="question-container">
+    {
+      question.displayAnswer ? (
+        <form  onSubmit={(e) => onSubmit(e)}>
+          <Question question={question.answer} />
+          <div>
+            <button onClick={updateCorrectAnswer}>Correct</button>
+            <button>Incorrect</button>
+          </div>
+        </form>
+            ) : (
+              <div id="question-container" onClick={displayAnswer}>
+              <Question question={question.question} />
+              </div>
+              )
+            }
+    </div>
   )
 };
 
