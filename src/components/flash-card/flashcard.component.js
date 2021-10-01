@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import addData from '../../store/reducers/index'
 import { 
   addCorrectAnswer, 
+  addIncorrectAnswer, 
   setCurrentQuestion,
   updateScore 
 } from '../../store/actions/index';
@@ -25,7 +26,7 @@ const FlashCard = ({ question }) => {
   const state = store.getState().appState
 
   const [correctAnswer, setCorrectAnswer] = useState(false)
-
+  console.log({ question })
   //Todo
   // add correct answers to correct answers array
   // add incorrect answers to incorrect answers array
@@ -34,17 +35,27 @@ const FlashCard = ({ question }) => {
   const onSubmit = (e) => {
     e.preventDefault()
     if (correctAnswer) {
-      question.isCorrect = true;
-      console.log('on submit ran', question.isCorrect)
-      dispatch(updateScore(question.value, addData));
-      dispatch(addCorrectAnswer([question, ...state.correctAnswers], addData));
-    } 
+      dispatchCorrect()
+    } else {
+      dispatchIncorrect()
+    }
     dispatch(setCurrentQuestion({}, addData));
   };
 
+  const dispatchCorrect = () => {
+    question.isCorrect = true;
+    dispatch(updateScore(question.value, addData));
+    dispatch(addCorrectAnswer([question, ...state.correctAnswers], addData));
+  };
+
+  const dispatchIncorrect = () => {
+    //Use this in the future to decrease the score
+    // dispatch(updateScore(question.value, addData));
+    dispatch(addIncorrectAnswer([question, ...state.incorrectAnswers], addData));
+  };
+  //refactor this...you probably don't need to use state
   const updateCorrectAnswer = () => {
     setCorrectAnswer(true)
-    console.log('update correct', correctAnswer)
   };
 
   const displayAnswer = () => {
@@ -67,7 +78,7 @@ const FlashCard = ({ question }) => {
               <Styled.QuestionContainer id="question-container" onClick={displayAnswer}>
                 <Question question={question.question} />
               </Styled.QuestionContainer>
-              )
+            )
             }
     </Styled.FlashCard>
   )

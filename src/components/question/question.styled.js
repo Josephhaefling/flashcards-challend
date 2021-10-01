@@ -5,6 +5,7 @@ const Styled = {
     color: white;
     font-size: 24px;
     font-weight: 500;
+    margin-bottom: 50px;
   `
 };
 

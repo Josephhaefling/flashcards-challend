@@ -1,67 +1,59 @@
 import React, { useEffect, useState } from 'react';
+import FlashCard from '../flash-card/flashcard.component';
+import { adjustQuestionData, getRandomCategory } from './useCategory.hook';
+import { isEmpty } from 'lodash';
+import Styled from './category.styled';
+//redux
+import { connect } from "react-redux"
+import { store } from '../../store';
 import { useDispatch } from "react-redux";
-import { connect } from "react-redux";
-import { store } from '../../store/index';
-import addNewCategory from '../../store/reducers/index'
-import { addCategory } from '../../store/actions/index';
-import FlashCard from '../flash-card/flash-card.component';
-import ShortId from 'shortid';
+import addData from '../../store/reducers/index'
+import { getQuestions } from '../../api';
+import { addQuestion, updateQuestions, setCurrentQuestion } from '../../store/actions/index';
 
-const availableCategories = [
-  'artliterature',
-  'language',
-  'sciencenature',
-  'general',
-  'fooddrink',
-  'peopleplaces',
-  'geography',
-  'historyholidays',
-  'entertainment',
-  'toysgames',
-  'music',
-  'mathematics', 
-  'religionmythology',
-  'sportsleisure'
-]
+const Category = ({ category }) => {
+  // Your application should display a random question as a flash card - planned
+  //  The application will save correct/incorrect history for each question
+  // After the user answers the next random flash card is displayed. - planned
+  const dispatch = useDispatch();
+  const state = store.getState().appState
 
-const Category = ({ currentCategory, setCurrentCategory }) => {
-  const dispatch = useDispatch()
-  const [question, setQuestion] = useState();
-
-  const getRandomCategory = () => {
-    const randomNumber = Math.floor(Math.random() * availableCategories.length);
-    //removes category so that it is not reused
-    const category = availableCategories[randomNumber];
-    availableCategories.splice(randomNumber, 1)
-    return category;
+  const setCurrenctQuestion = () => {
+    if (state.questions) {
+      const question = state.questions.pop();
+      dispatch(updateQuestions(state.questions, addData));
+      dispatch(setCurrentQuestion(question, addData));
+    }
   }
-
-  const createCategory =  (category) => {
-    const id = ShortId.generate()
-    const newCategory = { 
-      id, 
-      isComplete: false, 
-      title: category, 
-      question: {} 
-    };
-    console.log('creatCategory ran')
-    // dispatch(addCategory(newCategory, addNewCategory))
-  }
-
-  useEffect(() => {
-      const randomCategory = getRandomCategory();
-      createCategory(randomCategory)
-  }, [])
   
+  const createQuestions = async (category, numCategories, numQuestions) => {
+    const questions = [];
+    for (let i = 0; i < numQuestions; i++) {
+      // const question = await getQuestions(category);
+      const question = { data :[{ category: 'stuff', question: 'huh',  answer: 'what' }] };
+      const adjustedQuestion = adjustQuestionData(question.data[0]);
+      questions.push(adjustedQuestion);
+
+    } 
+    dispatch(addQuestion(questions, addData));
+  };
+  
+  useEffect(() => {
+    if (!state.questions || isEmpty(state.questions)) {
+      const category = getRandomCategory();
+      createQuestions(category, 1, 5);
+    }
+    if (isEmpty(state.currentQuestion)) {
+      setCurrenctQuestion();
+    }
+  }, [createQuestions, setCurrentQuestion])
+
   return (
-    <div>
-      <FlashCard question={question} setQuestion={setQuestion} category={currentCategory?.title} />
-    </div>
+    <Styled.Game>
+      <FlashCard question={state.currentQuestion} />
+    </Styled.Game>
   )
 }
-
-const mapStateToProps = () => {
-  return store.getState()
-}
+const mapStateToProps = () => store.getState()
 
 export default connect(mapStateToProps)(Category);

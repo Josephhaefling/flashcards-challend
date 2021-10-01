@@ -7,13 +7,15 @@ const appState = (state = game, action) => {
         ...state, 
         questions: action.questions
       }
-    } 
+    }
+     
     case 'UPDATE_QUESTIONS':{
       return {
         ...state, 
         questions: action.remainingQuestions
       }
     }
+
     case 'SET_CURRENT_QUESTION':{
       return {
         ...state, 
@@ -42,24 +44,6 @@ const appState = (state = game, action) => {
       }
     }
 
-    // case 'UPDATE_CORRECT_ANSWERS':{
-    //   return {
-    //     ...state, 
-    //     correctAnswers: state.correctAnswers += 1
-    //   }
-    // }
-    case 'ADD_ROUND': {
-      return {
-        ...state, 
-        currentRound: action.currentRound
-      }
-    }
-    case 'ADD_CATEGORY': {
-      return {
-        currentRound: action.currentCategory
-      }
-    }
-    
     default: {
       return state
     }

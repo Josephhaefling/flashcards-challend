@@ -9,7 +9,7 @@ const Styled = {
     width: 70%;
     `, 
 
-QuestionContainer: styled.form`
+  QuestionContainer: styled.form`
     align-items: center;
     border: 1px solid white;
     display: flex;
