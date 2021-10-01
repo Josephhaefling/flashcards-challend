@@ -3,7 +3,6 @@ import appState from './reducers'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 export const game = {
-  correctAnswers: [],
   currentQuestion: {},
   previousQuestions: [],
   score: 0
