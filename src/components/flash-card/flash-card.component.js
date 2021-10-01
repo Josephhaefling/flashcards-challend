@@ -1,45 +1,72 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { connect } from "react-redux";
+import { store } from '../../store/index';
+
+//components
 import AnswerInput from '../answer-input/answer-input.component';
 import Question from '../question/question.component';
-const FlashCard = (cardQuestion) => {
-// Flash cards at minimum will have: a category, a question and an answer
-// Clicking on the flash card reveals the answer
-// The user is then prompted whether or not their answer was correct.  
-  // const [userAnswer, setUserAnswer] = useState('');
-  //Set on Submit
-  // const [correct, setCorrect] = useEffect();
-  // const [questionAnswered, setQuestionAnswered] = useState(false);
-  // const { answer, category, question } = cardQuestion;
+
+//redux
+import { useDispatch } from "react-redux";
+import addData from '../../store/reducers/index'
+import { addQuestion} from '../../store/actions/index';
+import { addCorrectAnswer} from '../../store/actions/index';
+import { getQuestions } from '../../api/index';
+
+
+const FlashCard = ({ question }) => {
+  const dispatch = useDispatch();
+
+  const state = store.getState().appState
+
+  const [userAnswer, setUserAnswer] = useState('')
+
+  // render the question
+  console.log({ question })
+
 
 //Evaluates the answer
-  // const onSubmit = (e) => {
-  //   setQuestionAnswered(true)
-  //   return e.target.value.contains(answer)
-  // };
+  const onSubmit = (e) => {
+    // e.preventDefault()
+    // const answer = state.appState.currentQuestion.answer;
+    // const currentRound = state.appState.currentRound;
+    // if (userAnswer.includes(answer)) {
+    //   currentRound.correctAnswers.push(state.appState.currentQuestion)
+      // dispatch(addCorrectAnswer(currentRound, addData))
+    // } 
+    // return e.target.value.contains(answer)
+  };
 
-  //Todo rename this to something more descriptive
-  // const onChange = (e) => {
-  //   const value = e.target.value
-  //   setUserAnswer(value)
-  // }
+  // Todo rename this to something more descriptive
+  const onChange = (e) => {
+    const value = e.target.value
+    setUserAnswer(value)
+  }
 
+  useEffect(() => {
+    // if (!state.appState.currentRound.currentQuestion) {
+    //   createQuestion(category)
+    // }
+  }, []);
+
+  // console.log('state', state);
   return (
-    <div>
-      {/* <div id="CardBody">
-        <form>
-          <Question question={question}/>
-          <AnswerInput question={question} onChange={onChange} />
-        </form>
+    <form  onSubmit={(e) => onSubmit(e)}>
+      <div id="question-container">
+        <Question question={question.question} />
       </div>
-      <div id="CardFooter"> */}
-        {/* {
-          questionAnswered ?
-          // <div>result of answer</div>
-          // <SubmitButton onSubmit={onSubmit}/>
-        } */}
-      {/* </div> */}
-    </div>
+      <div>
+        <AnswerInput onChange={onChange} />
+      </div>
+      <div>
+        <button>Submit</button>
+      </div>
+    </form>
   )
 };
 
-export default FlashCard;
+const mapStateToProps = () => {
+    return store.getState()
+}
+
+export default connect(mapStateToProps)(FlashCard);

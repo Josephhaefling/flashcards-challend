@@ -1,20 +1,44 @@
-import React, { useEffect, useState } from 'react';
-// The application will track the users total score for this round
+// import React, { useEffect, useState } from 'react';
+// import Category from '../category/category.component';
+// import { useDispatch } from "react-redux";
+// import { connect } from "react-redux";
+// import { store } from '../../store/index';
+// import addNewRound from '../../store/reducers/index'
+// import { addRound } from '../../store/actions/index';
+// // The application will track the users total score for this round
 
-const Round = () => {
-  const [score, setScore] = useState();
-  const[correctAnswers, setCorrectAnswers] = useState()
-  const [questionsAnswered, setQuestionsAnswered] = useState()
+// const Round = ({ currentRound, setCurrentRound }) => {
+//   const dispatch = useDispatch()
 
-  useEffect(() => {
-    setScore(redux.score)
-  })
+//   const [currentCategory, setCurrentCategory] = useState();
+  
+//   const createRound = () => {
+//     const newRound = {
+//       correctAnswers: [],
+//       currentQuestion: {},
+//       incorrectAnswers: [],
+//       isComplete: false,
+//       previousCategories: [],
+//       }
+//     dispatch(addRound(newRound, addNewRound))
+//     }
+    
+//     useEffect(() => {
+//       if () {
+        
+//       }
+//       createRound();
+//     }, [])
+    
+//     return (
+//       <div>
+//        <Category currentCategory={currentCategory} setCurrentCategory={setCurrentCategory} /> 
+//       </div>
+//     )
+//   };
+ 
+// const mapStateToProps = () => {
+//   return store.getState()
+// }
 
-  return (
-    // <div>
-    // This is where we will render multiple categories
-    // </div>
-  )
-};
-
-export default Round;
+// export default connect(mapStateToProps)(Round);

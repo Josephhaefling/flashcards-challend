@@ -1,12 +1,12 @@
 import React from 'react';
 
-const AnswerInput = (question, onChange) => {
+const AnswerInput = ({ onChange }) => {
   //Todo Add mask 
   return (
     <input 
-      id={question}
-      name={question}
-      onChange={onChange}
+      // id={question}
+      // name={question}
+      onChange={e => onChange(e)}
       type="text" 
     />
   )
