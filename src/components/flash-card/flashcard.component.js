@@ -6,19 +6,19 @@ import { store } from '../../store/index';
 import { isEmpty } from 'lodash';
 
 //components
-import AnswerInput from '../answer-input/answer-input.component';
 import Question from '../question/question.component';
+import Button from '../button/button.component';
 
 //redux
 import { useDispatch } from "react-redux";
 import addData from '../../store/reducers/index'
-import { addQuestion} from '../../store/actions/index';
 import { 
   addCorrectAnswer, 
-  addPreviousQuestion, 
+  addCorrectQuestion, 
   setCurrentQuestion 
 } from '../../store/actions/index';
 import { getQuestions } from '../../api/index';
+import Styled from './flashcard.styled';
 
 const FlashCard = ({ question }) => {
   const dispatch = useDispatch();
@@ -26,43 +26,41 @@ const FlashCard = ({ question }) => {
 
   const [correctAnswer, setCorrectAnswer] = useState(false)
 
+  //Todo
+  // add correct answers to correct answers array
+  // add incorrect answers to incorrect answers array
+
 //Evaluates the answer, updates score, and clears current question
   const onSubmit = (e) => {
     e.preventDefault()
     if (correctAnswer) {
-      console.log('log in onSubmit')
       question.isCorrect = true;
+      console.log('on submit ran', question.isCorrect)
       dispatch(addCorrectAnswer(question.value, addData));
+      dispatch(addCorrectQuestion([question, ...state.previousQuestions], addData));
     } 
-    dispatch(addPreviousQuestion([question, ...state.previousQuestions], addData));
     dispatch(setCurrentQuestion({}, addData));
   };
 
   const updateCorrectAnswer = () => {
     setCorrectAnswer(true)
-  }
+    console.log('update correct', correctAnswer)
+  };
 
   const displayAnswer = () => {
     question.displayAnswer = true;
     dispatch(setCurrentQuestion(question, addData));
-  }
+  };
 
-  useEffect(() => {
-    // if (!isEmpty(question)) {
-    //   flashCard  = createForm();
-    // }
-  }, [question]);
-
-  console.log(question)
   return (
-    <div id="question-container">
+    <Styled.FlashCard id="question-container">
     {
       question.displayAnswer ? (
         <form  onSubmit={(e) => onSubmit(e)}>
           <Question question={question.answer} />
           <div>
-            <button onClick={updateCorrectAnswer}>Correct</button>
-            <button>Incorrect</button>
+            <Button onClick={updateCorrectAnswer} label="Correct" />
+            <Button label="Incorrect" />
           </div>
         </form>
             ) : (
@@ -71,7 +69,7 @@ const FlashCard = ({ question }) => {
               </div>
               )
             }
-    </div>
+    </Styled.FlashCard>
   )
 };
 

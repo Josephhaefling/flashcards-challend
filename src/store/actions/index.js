@@ -19,10 +19,10 @@ export const setCurrentQuestion = question => {
   })
 }
 
-export const addPreviousQuestion = previousQuestions => {
+export const addCorrectQuestion = correctAnswers => {
   return ({
-  type: 'ADD_PREVIOUS_QUESTION',
-  previousQuestions
+  type: 'ADD_CORRECT_ANSWER',
+  correctAnswers
 })}
 
 export const addCorrectAnswer = value => {

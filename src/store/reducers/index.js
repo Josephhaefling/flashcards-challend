@@ -21,10 +21,10 @@ const appState = (state = game, action) => {
       }
     }
 
-    case 'ADD_PREVIOUS_QUESTION': {
+    case 'ADD_CORRECT_ANSWER': {
       return {
         ...state,
-        previousQuestions: action.previousQuestions
+        correctAnswers: action.correctAnswers
       }
     }
 

@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import FlashCard from '../flash-card/flash-card.component';
+import FlashCard from '../flash-card/flashcard.component';
 import { adjustQuestionData, getRandomCategory } from './useGame.hook';
 import { isEmpty } from 'lodash';
+import Styled from './game.styled';
 //redux
 import { connect } from "react-redux"
 import { store } from '../../store';
 import { useDispatch } from "react-redux";
 import addData from '../../store/reducers/index'
+import { getQuestions } from '../../api';
 import { addQuestion, updateQuestions, setCurrentQuestion } from '../../store/actions/index';
 
 const Game = () => {
@@ -27,8 +29,8 @@ const Game = () => {
   const createQuestions = async (category, numQuestions) => {
     const questions = [];
     for (let i = 0; i < numQuestions; i++) {
-      // const question = await getQuestions(category)
-      const question = { data :[{ category: 'stuff', question: 'huh',  answer: 'what' }] };
+      const question = await getQuestions(category)
+      // const question = { data :[{ category: 'stuff', question: 'huh',  answer: 'what' }] };
       const adjustedQuestion = adjustQuestionData(question.data[0]);
       questions.push(adjustedQuestion);
 
@@ -47,9 +49,9 @@ const Game = () => {
   }, [createQuestions, setCurrentQuestion])
 
   return (
-    <div>
+    <Styled.Game>
       <FlashCard question={state.currentQuestion} />
-    </div>
+    </Styled.Game>
   )
 }
 const mapStateToProps = () => store.getState()

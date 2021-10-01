@@ -1,11 +1,12 @@
 import React from 'react';
+import Styled from './question.styled';
 
 const Question = ({ question }) => {
   // console.log('question in question', question);
   return (
-    <label for={question}>
-      <p>{question}</p>
-    </label>
+    <div>
+      <Styled.Question>{question}</Styled.Question>
+    </div>
   )
 };
 
