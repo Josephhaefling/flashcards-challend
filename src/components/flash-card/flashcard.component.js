@@ -14,8 +14,8 @@ import { useDispatch } from "react-redux";
 import addData from '../../store/reducers/index'
 import { 
   addCorrectAnswer, 
-  addCorrectQuestion, 
-  setCurrentQuestion 
+  setCurrentQuestion,
+  updateScore 
 } from '../../store/actions/index';
 import { getQuestions } from '../../api/index';
 import Styled from './flashcard.styled';
@@ -36,8 +36,8 @@ const FlashCard = ({ question }) => {
     if (correctAnswer) {
       question.isCorrect = true;
       console.log('on submit ran', question.isCorrect)
-      dispatch(addCorrectAnswer(question.value, addData));
-      dispatch(addCorrectQuestion([question, ...state.previousQuestions], addData));
+      dispatch(updateScore(question.value, addData));
+      dispatch(addCorrectAnswer([question, ...state.correctAnswers], addData));
     } 
     dispatch(setCurrentQuestion({}, addData));
   };
@@ -56,17 +56,17 @@ const FlashCard = ({ question }) => {
     <Styled.FlashCard id="question-container">
     {
       question.displayAnswer ? (
-        <form  onSubmit={(e) => onSubmit(e)}>
-          <Question question={question.answer} />
-          <div>
-            <Button onClick={updateCorrectAnswer} label="Correct" />
-            <Button label="Incorrect" />
-          </div>
-        </form>
+          <Styled.Form  onSubmit={(e) => onSubmit(e)}>
+            <Question question={question.answer} />
+            <Styled.ButtonContainer>
+              <Button onClick={updateCorrectAnswer} label="Correct" />
+              <Button label="Incorrect" />
+            </Styled.ButtonContainer>
+          </Styled.Form>
             ) : (
-              <div id="question-container" onClick={displayAnswer}>
-              <Question question={question.question} />
-              </div>
+              <Styled.QuestionContainer id="question-container" onClick={displayAnswer}>
+                <Question question={question.question} />
+              </Styled.QuestionContainer>
               )
             }
     </Styled.FlashCard>

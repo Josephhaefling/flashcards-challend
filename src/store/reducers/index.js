@@ -28,6 +28,13 @@ const appState = (state = game, action) => {
       }
     }
 
+    case 'ADD_INCORRECT_ANSWER': {
+      return {
+        ...state,
+        incorrectAnswers: action.incorrectAnswers
+      }
+    }
+
     case 'UPDATE_SCORE': {
       return {
         ...state,

@@ -29,8 +29,8 @@ const Game = () => {
   const createQuestions = async (category, numQuestions) => {
     const questions = [];
     for (let i = 0; i < numQuestions; i++) {
-      const question = await getQuestions(category)
-      // const question = { data :[{ category: 'stuff', question: 'huh',  answer: 'what' }] };
+      // const question = await getQuestions(category)
+      const question = { data :[{ category: 'stuff', question: 'huh',  answer: 'what' }] };
       const adjustedQuestion = adjustQuestionData(question.data[0]);
       questions.push(adjustedQuestion);
 
