@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import FlashCard from '../flash-card/flash-card.component';
 import { adjustQuestionData, getRandomCategory } from './useGame.hook';
-
+import { isEmpty } from 'lodash';
 //redux
 import { connect } from "react-redux"
 import { store } from '../../store';
@@ -43,11 +43,14 @@ const Game = () => {
   };
   
   useEffect(() => {
-    console.log('render ran in game')
+    if (!state.questions) {
       const category = getRandomCategory();
       createQuestions(category, 5);
-      // setCurrenctQuestion();
-  }, [])
+    }
+    if (isEmpty(state.currentQuestion)) {
+      setCurrenctQuestion();
+    }
+  }, [createQuestions, setCurrentQuestion])
 
   return (
     <div>

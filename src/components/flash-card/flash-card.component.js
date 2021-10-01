@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { connect } from "react-redux";
 import { store } from '../../store/index';
 
+// Lodash
+import { isEmpty } from 'lodash';
+
 //components
 import AnswerInput from '../answer-input/answer-input.component';
 import Question from '../question/question.component';
@@ -27,11 +30,26 @@ const FlashCard = ({ question }) => {
     // if answer is correct update correct answers
   // move current question to previous question
   //refresh game so that a new question is displayed 
-
+const createForm  = () => {
+  return (
+  <form  onSubmit={(e) => onSubmit(e)}>
+      <div id="question-container">
+        <Question question={question.question} />
+      </div>
+      <div>
+        <AnswerInput onChange={onChange} />
+      </div>
+      <div>
+        <button>Submit</button>
+      </div>
+    </form>
+  )
+};
 //Evaluates the answer
   const onSubmit = (e) => {
     e.preventDefault()
     if (userAnswer.includes(question.answer)) {
+      console.log('on submit ran')
       // dispatch(addCorrectAnswer(question, addData))
     } 
     // return e.target.value.contains(answer)
@@ -44,12 +62,12 @@ const FlashCard = ({ question }) => {
   }
 
   useEffect(() => {
-    // if (!state.appState.currentRound.currentQuestion) {
-    //   createQuestion(category)
+    // if (!isEmpty(question)) {
+    //   flashCard  = createForm();
     // }
   }, [question]);
 
-  console.log('state', state);
+  console.log(state)
   return (
     <form  onSubmit={(e) => onSubmit(e)}>
       <div id="question-container">
