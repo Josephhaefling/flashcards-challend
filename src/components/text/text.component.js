@@ -1,12 +1,12 @@
 import React from 'react';
 import Styled from './text.styled';
 
-const Question = ({ color = 'white', question }) => {
+const Text = ({ color = 'white', children }) => {
   return (
     <div>
-      <Styled.Question color={color} >{question}</Styled.Question>
+      <Styled.Question color={color} >{children}</Styled.Question>
     </div>
   )
 };
 
-export default Question;
+export default Text;

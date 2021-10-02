@@ -4,7 +4,7 @@ import React from 'react';
 import Styled from './flashcard.styled';
 
 //components
-import Question from '../question/question.component';
+import Text from '../text/text.component';
 import Button from '../button/button.component';
 
 //redux
@@ -56,7 +56,7 @@ const FlashCard = ({ question }) => {
     {
       question.displayAnswer ? (
           <Styled.Form  onSubmit={(e) => onSubmit(e)}>
-            <Question question={question.answer} />
+            <Text>question={question.answer}</Text>
             <Styled.ButtonContainer>
               <Button onClick={updateCorrectAnswer} label="Correct" />
               <Button label="Incorrect" />
@@ -64,7 +64,7 @@ const FlashCard = ({ question }) => {
           </Styled.Form>
             ) : (
               <Styled.QuestionContainer id="question-container" onClick={displayAnswer}>
-                <Question question={question.question} />
+                <Text>{question.question}</Text>
               </Styled.QuestionContainer>
             )
             }

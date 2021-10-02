@@ -6,12 +6,13 @@ import { store } from '../../store/index';
 import addData from '../../store/reducers/index'
 import { startGame } from '../../store/actions/index';
 
-
+//helpers
 import { availableCategories } from '../../available-categories/available-categories';
 
 //components
-import Question from '../question/question.component';
 import Button from '../button/button.component';
+import Heading from '../heading/heading.component';
+import Text from '../text/text.component';
 
 const HomePage = ({ setCategory }) => {
   const dispatch = useDispatch();
@@ -38,8 +39,12 @@ const HomePage = ({ setCategory }) => {
 
   return (
     <div>
-      <Question color="black" question="Welcome To Flashcards" />
-      <Question color="black" question="Would you like to choose a category?" />
+      <Heading color="black" level={1}>
+        Welcome to Flashcards
+      </Heading>
+      <Text color="black" >
+        Would you like to choose a category?
+      </Text>
       <form onChange={e => handleChange(e)} onSubmit={handleSubmit} >
         <select>
           <option key="random" value="Random">Random</option>
