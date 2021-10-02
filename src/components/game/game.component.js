@@ -41,15 +41,15 @@ const Game = () => {
 
 
   const generateCategories = (categories) => {
-   const allCategories = categories.map(category => {
-    return { 
-      category, 
-      correctAnswers: [], 
-      currentQuestion: {}, 
-      inbcorrectAnswers: [], 
-      questions: [] 
-    };
-   })
+    const allCategories = categories.map(category => {
+      return { 
+        category, 
+        correctAnswers: [], 
+        currentQuestion: {}, 
+        inbcorrectAnswers: [], 
+        questions: [] 
+      };
+    })
     dispatch(createCategories(allCategories, addData));
   };
 
@@ -63,11 +63,6 @@ const Game = () => {
     }
     return categories;
   };
-  //game stared
-  //game compelte
-  //if gameStarted and !gameComplete display categories
-  //else if gameStarted and gameComplete display score page
-  //else display homepage
 
   const getPage = () => {
     const { gameStarted, gameComplete } = state;
@@ -81,12 +76,12 @@ const Game = () => {
   }
 
   useEffect(() => {
-    if(isEmpty(state.categories)) {
-      const categories = category || getRandomCategories(1)
+    if(state.gameStarted && isEmpty(state.categories)) {
+      const categories = [category] || getRandomCategories(1)
       generateCategories(categories);
     }
   }, [generateCategories]);
-  
+
   return (
     <Styled.Game>
       {getPage()}  

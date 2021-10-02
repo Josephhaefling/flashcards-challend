@@ -43,9 +43,10 @@ const Category = ({ category }) => {
       const adjustedQuestion = adjustQuestionData(question.data[0]);
       questions.push(adjustedQuestion);
     } 
+    console.log('category in category', category)
     dispatch(addQuestion(questions, addData));
   };
-  
+
   useEffect(() => {
     if (!state.questions || isEmpty(state.questions)) {
       const categoryTitle = category || getRandomCategory();
@@ -55,7 +56,6 @@ const Category = ({ category }) => {
       setCurrenctQuestion();
     }
   }, [createQuestions, setCurrentQuestion]);
-  console.log('state in category', state)
   return (
     <Styled.Game>
       <FlashCard question={state.currentQuestion} />

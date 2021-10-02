@@ -63,6 +63,13 @@ const appState = (state = game, action) => {
       }
     }
 
+    case 'UPDATE_CATEGORY_COMPLETE': {
+      return {
+        ...state,
+        categories: action.categories
+      }
+    }
+
     default: {
       return state
     }

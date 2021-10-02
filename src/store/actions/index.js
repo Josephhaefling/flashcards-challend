@@ -61,4 +61,11 @@ export const createCategories = categories => {
   })
 };
 
+export const updateCategoryComplete = value => {
+  return ({
+  type: 'UPDATE_CATEGORY_COMPLETE',
+  value
+  })
+};
+
 
