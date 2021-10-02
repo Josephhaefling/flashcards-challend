@@ -55,7 +55,7 @@ const Category = ({ category }) => {
       setCurrenctQuestion();
     }
   }, [createQuestions, setCurrentQuestion]);
-
+  console.log('state in category', state)
   return (
     <Styled.Game>
       <FlashCard question={state.currentQuestion} />

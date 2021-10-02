@@ -4,8 +4,9 @@ import React from 'react';
 import Styled from './flashcard.styled';
 
 //components
-import Text from '../text/text.component';
 import Button from '../button/button.component';
+import Card from '../card/card.component';
+import Text from '../text/text.component';
 
 //redux
 import addData from '../../store/reducers/index'
@@ -52,23 +53,25 @@ const FlashCard = ({ question }) => {
   };
 
   return (
-    <Styled.FlashCard id="question-container">
-    {
-      question.displayAnswer ? (
-          <Styled.Form  onSubmit={(e) => onSubmit(e)}>
-            <Text>question={question.answer}</Text>
-            <Styled.ButtonContainer>
-              <Button onClick={updateCorrectAnswer} label="Correct" />
-              <Button label="Incorrect" />
-            </Styled.ButtonContainer>
-          </Styled.Form>
-            ) : (
-              <Styled.QuestionContainer id="question-container" onClick={displayAnswer}>
-                <Text>{question.question}</Text>
-              </Styled.QuestionContainer>
-            )
-            }
-    </Styled.FlashCard>
+    <Card id="question-container">
+      <Card.Body>
+      {
+        question.displayAnswer ? (
+            <Styled.Form  onSubmit={(e) => onSubmit(e)}>
+              <Text>question={question.answer}</Text>
+              <Styled.ButtonContainer>
+                <Button onClick={updateCorrectAnswer} label="Correct" />
+                <Button label="Incorrect" />
+              </Styled.ButtonContainer>
+            </Styled.Form>
+              ) : (
+                <Styled.QuestionContainer id="question-container" onClick={displayAnswer}>
+                  <Text>{question.question}</Text>
+                </Styled.QuestionContainer>
+              )
+        }
+      </Card.Body>
+    </Card>
   )
 };
 

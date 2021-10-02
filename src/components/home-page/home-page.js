@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Styled from './home-page.styled';
+
 //redux
 import { connect, useDispatch } from "react-redux";
 import { store } from '../../store/index';
@@ -11,6 +13,7 @@ import { availableCategories } from '../../available-categories/available-catego
 
 //components
 import Button from '../button/button.component';
+import Card from '../card/card.component';
 import Heading from '../heading/heading.component';
 import Text from '../text/text.component';
 
@@ -38,23 +41,27 @@ const HomePage = ({ setCategory }) => {
     }
 
   return (
-    <div>
-      <Heading color="black" level={1}>
-        Welcome to Flashcards
-      </Heading>
-      <Text color="black" >
-        Would you like to choose a category?
-      </Text>
-      <form onChange={e => handleChange(e)} onSubmit={handleSubmit} >
-        <select>
-          <option key="random" value="Random">Random</option>
-          {createOptions()}
-        </select>
-        <div>
-          <Button color="black" label="StartGame"/>
-        </div>
-      </form>
-    </div>
+    <Card>
+      <Card.Header>
+        <Heading level={1}>
+          Welcome to Flashcards
+        </Heading>
+      </Card.Header>
+      <Card.Body>
+        <Text >
+          Would you like to choose a category?
+        </Text>
+        <form onChange={e => handleChange(e)} onSubmit={handleSubmit} >
+          <select>
+            <option key="random" value="Random">Random</option>
+            {createOptions()}
+          </select>
+          <div>
+            <Button label="StartGame"/>
+          </div>
+        </form>
+      </Card.Body>
+    </Card>
   )
 }
 

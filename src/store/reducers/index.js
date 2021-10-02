@@ -8,6 +8,12 @@ const appState = (state = game, action) => {
         gameStarted: action.value
       }
     }
+    case 'END_GAME': {
+      return {
+        ...state,
+        gameComplete: action.value
+      }
+    }
     case 'ADD_QUESTIONS': {
       return {
         ...state, 

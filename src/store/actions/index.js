@@ -5,6 +5,13 @@ export const startGame = value => {
   })
 };
 
+export const endGame = value => {
+  return ({
+  type: 'END_GAME',
+  value
+  })
+};
+
 export const addQuestion = questions => {
   return ({
     type: 'ADD_QUESTIONS',

@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 const Styled = {
-  Heading: styled.div`
-      color: white;
-  `
-};
+  HomePage: styled.div`
+    border: 5px solid red;
+  `,
+}
 
 export default Styled;

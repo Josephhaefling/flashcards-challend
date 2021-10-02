@@ -3,9 +3,13 @@ import React, { useEffect, useState } from 'react';
 //components
 import HomePage from '../home-page/home-page';
 import Category from '../category/category.component';
+import ScorePage from '../score-page/score-page';
 
 //lodash
 import { isEmpty } from 'lodash';
+
+//styles
+import Styled from './game.styled';
 
 //redux
 import { connect, useDispatch } from "react-redux";
@@ -59,7 +63,23 @@ const Game = () => {
     }
     return categories;
   };
-  
+  //game stared
+  //game compelte
+  //if gameStarted and !gameComplete display categories
+  //else if gameStarted and gameComplete display score page
+  //else display homepage
+
+  const getPage = () => {
+    const { gameStarted, gameComplete } = state;
+    if(gameStarted && gameComplete) {
+      return <ScorePage />
+    } else if (gameStarted && !gameComplete) {
+      return <Category category={category} />
+    } else {
+      return  <HomePage setCategory={setCategory} />
+    }
+  }
+
   useEffect(() => {
     if(isEmpty(state.categories)) {
       const categories = category || getRandomCategories(1)
@@ -68,15 +88,9 @@ const Game = () => {
   }, [generateCategories]);
   
   return (
-    <div>
-      {
-        state.gameStarted ? (
-          <Category category={category} />
-        ) : (
-          <HomePage setCategory={setCategory} />
-        )
-      }
-    </div>
+    <Styled.Game>
+      {getPage()}  
+    </Styled.Game>
   )
 };
 
