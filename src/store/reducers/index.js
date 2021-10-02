@@ -2,6 +2,12 @@ import { game } from '../index';
 
 const appState = (state = game, action) => {
   switch (action.type) {
+    case 'START_GAME': {
+      return {
+        ...state,
+        gameStarted: action.value
+      }
+    }
     case 'ADD_QUESTIONS': {
       return {
         ...state, 
@@ -41,6 +47,13 @@ const appState = (state = game, action) => {
       return {
         ...state,
         score: state.score += action.value
+      }
+    }
+
+    case 'CREATE_CATEGORIES': {
+      return {
+        ...state,
+        categories: action.categories
       }
     }
 

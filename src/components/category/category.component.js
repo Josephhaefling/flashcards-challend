@@ -12,6 +12,7 @@ import { getQuestions } from '../../api';
 import { addQuestion, updateQuestions, setCurrentQuestion } from '../../store/actions/index';
 
 const Category = ({ category }) => {
+  console.log('category in category', category);
   // Your application should display a random question as a flash card - planned
   //  The application will save correct/incorrect history for each question
   // After the user answers the next random flash card is displayed. - planned

@@ -1,10 +1,10 @@
 import React from 'react';
 import Styled from './button.styled';
 
-const Button = ({ onClick, label }) => {
+const Button = ({ color, label, onClick }) => {
   return (
     <div>
-      <Styled.Button onClick={onClick}>{label}</Styled.Button>
+      <Styled.Button color={color} onClick={onClick}>{label}</Styled.Button>
     </div>
   )
 }

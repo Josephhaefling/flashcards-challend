@@ -1,3 +1,10 @@
+export const startGame = value => {
+  return ({
+  type: 'START_GAME',
+  value
+  })
+};
+
 export const addQuestion = questions => {
   return ({
     type: 'ADD_QUESTIONS',
@@ -37,6 +44,13 @@ export const updateScore = value => {
   return ({
   type: 'UPDATE_SCORE',
   value
+  })
+};
+
+export const createCategories = categories => {
+  return ({
+  type: 'CREATE_CATEGORIES',
+  categories
   })
 };
 

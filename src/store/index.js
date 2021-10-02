@@ -4,16 +4,14 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { addCorrectAnswer } from './actions';
 
 export const game = {
+  categories: [],
   correctAnswers: [],
   currentQuestion: {},
+  gameComplete: false,
+  gameStarted: false,
   incorrectAnswers: [],
-  previousQuestions: [],
   score: 0,
-  // previousCategories: [],
-  // currentRound: {
-  //   categories: [],
-  //   currentCategory: {},
-  // },
+  
 };
 
 const appReducer = combineReducers({

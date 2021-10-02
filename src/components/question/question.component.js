@@ -1,11 +1,11 @@
 import React from 'react';
 import Styled from './question.styled';
 
-const Question = ({ question }) => {
+const Question = ({ color = 'white', question }) => {
   // console.log('question in question', question);
   return (
     <div>
-      <Styled.Question>{question}</Styled.Question>
+      <Styled.Question color={color} >{question}</Styled.Question>
     </div>
   )
 };
