@@ -41,15 +41,15 @@ const Game = () => {
 
 
   const generateCategories = (categories) => {
-    const allCategories = categories.map(category => {
-      return { 
-        category, 
+    const allCategories = categories.reduce((categories, category) => {
+       categories[category] = { 
         correctAnswers: [], 
         currentQuestion: {}, 
         inbcorrectAnswers: [], 
         questions: [] 
       };
-    })
+      return categories;
+    }, {})
     dispatch(createCategories(allCategories, addData));
   };
 
@@ -74,7 +74,8 @@ const Game = () => {
       return  <HomePage setCategory={setCategory} />
     }
   }
-
+  //Todo
+  //check if all categories are complete if so display score page 
   useEffect(() => {
     if(state.gameStarted && isEmpty(state.categories)) {
       const categories = [category] || getRandomCategories(1)

@@ -17,14 +17,14 @@ const appState = (state = game, action) => {
     case 'ADD_QUESTIONS': {
       return {
         ...state, 
-        questions: action.questions
+        categories: action.questions
       }
     }
      
     case 'UPDATE_QUESTIONS':{
       return {
         ...state, 
-        questions: action.remainingQuestions
+        categories: action.remainingQuestions
       }
     }
 

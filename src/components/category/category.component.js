@@ -26,29 +26,29 @@ import {
 const Category = ({ category }) => {
   const dispatch = useDispatch();
   const state = store.getState().appState;
+  const fullCategory = state.categories[category];
 
   const setCurrenctQuestion = () => {
-    if (state.questions) {
-      const question = state.questions.pop();
-      dispatch(updateQuestions(state.questions, addData));
+    if (!isEmpty(fullCategory?.questions)) {
+      const question = fullCategory.questions.pop();
+      dispatch(updateQuestions(state.categories, addData));
       dispatch(setCurrentQuestion(question, addData));
     }
-  };
-  
+  }; 
+
   const createQuestions = async (category, numCategories, numQuestions) => {
     const questions = [];
     for (let i = 0; i < numQuestions; i++) {
       const question = await getQuestions(category);
-      // const question = { data :[{ category: 'stuff', question: 'huh?',  answer: 'what' }] };
       const adjustedQuestion = adjustQuestionData(question.data[0]);
       questions.push(adjustedQuestion);
     } 
-    console.log('category in category', category)
-    dispatch(addQuestion(questions, addData));
+    state.categories[category].questions = questions
+    dispatch(addQuestion(state.categories, addData));
   };
 
   useEffect(() => {
-    if (!state.questions || isEmpty(state.questions)) {
+    if (fullCategory && isEmpty(fullCategory.questions)) {
       const categoryTitle = category || getRandomCategory();
       createQuestions(categoryTitle, 1, 5);
     }
@@ -56,6 +56,7 @@ const Category = ({ category }) => {
       setCurrenctQuestion();
     }
   }, [createQuestions, setCurrentQuestion]);
+
   return (
     <Styled.Game>
       <FlashCard question={state.currentQuestion} />
