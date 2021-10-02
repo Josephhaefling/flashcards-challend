@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import Button from './button.component';
 
 const Styled = {
   Button: styled.button`

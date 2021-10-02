@@ -1,11 +1,12 @@
 import React from 'react';
+import Styled from './text.styled';
 
-const Text = ({ bold, size, text }) => {
+const Question = ({ color = 'white', question }) => {
   return (
     <div>
-      <p>{text}</p>
+      <Styled.Question color={color} >{question}</Styled.Question>
     </div>
   )
-}
+};
 
-export default Text;
+export default Question;

@@ -1,44 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import { connect } from "react-redux";
-import { store } from '../../store/index';
+import React from 'react';
 
-// Lodash
-import { isEmpty } from 'lodash';
+//styles
+import Styled from './flashcard.styled';
 
 //components
 import Question from '../question/question.component';
 import Button from '../button/button.component';
 
 //redux
-import { useDispatch } from "react-redux";
 import addData from '../../store/reducers/index'
+import { connect, useDispatch } from "react-redux";
+import { store } from '../../store/index';
 import { 
   addCorrectAnswer, 
   addIncorrectAnswer, 
   setCurrentQuestion,
   updateScore 
 } from '../../store/actions/index';
-import { getQuestions } from '../../api/index';
-import Styled from './flashcard.styled';
 
 const FlashCard = ({ question }) => {
   const dispatch = useDispatch();
-  const state = store.getState().appState
-
-  const [correctAnswer, setCorrectAnswer] = useState(false)
-  console.log({ question })
-  //Todo
-  // add correct answers to correct answers array
-  // add incorrect answers to incorrect answers array
+  const state = store.getState().appState;
 
 //Evaluates the answer, updates score, and clears current question
   const onSubmit = (e) => {
-    e.preventDefault()
-    if (correctAnswer) {
-      dispatchCorrect()
-    } else {
+    question.answerCorrect ?
+      dispatchCorrect() :
       dispatchIncorrect()
-    }
     dispatch(setCurrentQuestion({}, addData));
   };
 
@@ -49,13 +37,13 @@ const FlashCard = ({ question }) => {
   };
 
   const dispatchIncorrect = () => {
-    //Use this in the future to decrease the score
+    //Use this in the future to decrease the score jeopordy style
     // dispatch(updateScore(question.value, addData));
     dispatch(addIncorrectAnswer([question, ...state.incorrectAnswers], addData));
   };
-  //refactor this...you probably don't need to use state
+
   const updateCorrectAnswer = () => {
-    setCorrectAnswer(true)
+    question.answerCorrect = true;
   };
 
   const displayAnswer = () => {
@@ -86,6 +74,6 @@ const FlashCard = ({ question }) => {
 
 const mapStateToProps = () => {
     return store.getState()
-}
+};
 
 export default connect(mapStateToProps)(FlashCard);

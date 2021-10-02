@@ -2,16 +2,16 @@ import React, { useEffect, useState } from 'react';
 
 //components
 import HomePage from '../home-page/home-page';
+import Category from '../category/category.component';
+
+//lodash
+import { isEmpty } from 'lodash';
 
 //redux
 import { connect, useDispatch } from "react-redux";
 import { store } from '../../store/index';
-import { adjustQuestionData, getRandomCategory } from '../category/useCategory.hook';
 import addData from '../../store/reducers/index'
-import { 
-  addQuestion, 
-  createCategories
-} from '../../store/actions/index';
+import { createCategories } from '../../store/actions/index';
 
 const availableCategories = [
   'artliterature',
@@ -31,9 +31,9 @@ const availableCategories = [
 ];
 
 const Game = () => {
-  const dispatch = useDispatch()
-  const state = store.getState().appState
-  const [category, setCategory] = useState('')
+  const dispatch = useDispatch();
+  const state = store.getState().appState;
+  const [category, setCategory] = useState('');
 
 
   const generateCategories = (categories) => {
@@ -44,7 +44,7 @@ const Game = () => {
       currentQuestion: {}, 
       inbcorrectAnswers: [], 
       questions: [] 
-    }
+    };
    })
     dispatch(createCategories(allCategories, addData));
   };
@@ -61,25 +61,24 @@ const Game = () => {
   };
   
   useEffect(() => {
-    if(!state.categories) {
-      const categories = getRandomCategories(2)
+    if(isEmpty(state.categories)) {
+      const categories = category || getRandomCategories(1)
       generateCategories(categories);
     }
-  }, [generateCategories])
+  }, [generateCategories]);
   
-  console.log({ category })
   return (
     <div>
       {
         state.gameStarted ? (
-          <p>Howdy</p>
+          <Category category={category} />
         ) : (
           <HomePage setCategory={setCategory} />
         )
       }
     </div>
   )
-}
+};
 
 const mapStateToProps = () => {
   return store.getState()
