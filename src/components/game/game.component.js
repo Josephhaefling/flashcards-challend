@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 //components
 import HomePage from '../home-page/home-page';
 import Category from '../category/category.component';
-import ScorePage from '../score-page/score-page';
+import ScorePage from '../score-page/score-page.component';
 
 //lodash
 import { isEmpty } from 'lodash';
@@ -65,6 +65,7 @@ const Game = () => {
   };
 
   const getPage = () => {
+    console.log('get page ran')
     const { gameStarted, gameComplete } = state;
     if(gameStarted && gameComplete) {
       return <ScorePage />
@@ -75,9 +76,16 @@ const Game = () => {
     }
   }
   //Todo
-  //check if all categories are complete if so display score page 
+  //create a function in category that checks of there are any reaming questions
+  //if there are do nothing
+  //if there aren't mark as complete
+
+  //iterate over categories check if all categories are complete if so 
+  //update game complete to true
+
   useEffect(() => {
     if(state.gameStarted && isEmpty(state.categories)) {
+      console.log('the use effect ran')
       const categories = [category] || getRandomCategories(1)
       generateCategories(categories);
     }

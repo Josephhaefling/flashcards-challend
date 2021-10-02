@@ -19,10 +19,10 @@ export const addQuestion = questions => {
   })
 };
 
-export const updateQuestions = remainingQuestions => {
+export const updateCategories = categories => {
   return ({
-    type: 'UPDATE_QUESTIONS',
-    remainingQuestions
+    type: 'UPDATE_CATEGORIES',
+    categories
   })
 };
 
@@ -64,6 +64,13 @@ export const createCategories = categories => {
 export const updateCategoryComplete = value => {
   return ({
   type: 'UPDATE_CATEGORY_COMPLETE',
+  value
+  })
+};
+
+export const updateGameComplete = value => {
+  return ({
+  type: 'UPDATE_GAME_COMPLETE',
   value
   })
 };

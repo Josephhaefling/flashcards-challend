@@ -21,10 +21,10 @@ const appState = (state = game, action) => {
       }
     }
      
-    case 'UPDATE_QUESTIONS':{
+    case 'UPDATE_CATEGORIES':{
       return {
         ...state, 
-        categories: action.remainingQuestions
+        categories: action.categories
       }
     }
 
@@ -67,6 +67,13 @@ const appState = (state = game, action) => {
       return {
         ...state,
         categories: action.categories
+      }
+    }
+
+    case 'UPDATE_GAME_COMPLETE': {
+      return {
+        ...state,
+        gameComplete: action.value
       }
     }
 

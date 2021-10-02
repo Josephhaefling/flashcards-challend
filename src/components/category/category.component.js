@@ -19,7 +19,9 @@ import { store } from '../../store';
 import addData from '../../store/reducers/index'
 import { 
   addQuestion, 
-  updateQuestions, 
+  updateCategories, 
+  updateCategoryComplete,
+  updateGameComplete,
   setCurrentQuestion 
 } from '../../store/actions/index';
 
@@ -29,12 +31,20 @@ const Category = ({ category }) => {
   const fullCategory = state.categories[category];
 
   const setCurrenctQuestion = () => {
-    if (!isEmpty(fullCategory?.questions)) {
+    console.log('full category', fullCategory)
+    if (!isEmpty(fullCategory?.questions) && !fullCategory.categoryComplete) {
       const question = fullCategory.questions.pop();
-      dispatch(updateQuestions(state.categories, addData));
+      dispatch(updateCategories(state.categories, addData));
       dispatch(setCurrentQuestion(question, addData));
     }
+    // isEmpty(fullCategory?.questions) && updateCategoryIsComplete()
   }; 
+
+  const updateCategoryIsComplete = () => {
+    fullCategory.categoryComplete = true;
+    dispatch(updateCategoryComplete(state.categories, addData));
+    dispatch(updateGameComplete(true, addData));
+  }
 
   const createQuestions = async (category, numCategories, numQuestions) => {
     const questions = [];

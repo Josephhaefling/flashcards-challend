@@ -24,14 +24,8 @@ const FlashCard = ({ question }) => {
   const dispatch = useDispatch();
   const state = store.getState().appState;
 
-  const checkIfComplete = () => {
-    const thing = state.categories.find(category => question.category === category.category) 
-    console.log('thing', thing)
-  }
-
 //Evaluates the answer, updates score, and clears current question
   const onSubmit = (e) => {
-    checkIfComplete()
     question.answerCorrect ?
       dispatchCorrect() :
       dispatchIncorrect()
