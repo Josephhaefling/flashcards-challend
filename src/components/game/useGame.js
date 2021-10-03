@@ -5,9 +5,9 @@ import { availableCategories } from '../../helpers/available-categories';
 export const getRandomCategories = (number = 1) => {
     const categories = []
     for (let i = 0; i < number; i ++) {
-      const randomNumber = Math.floor(Math.random() * availableCategories.length);
-      const category = availableCategories[randomNumber];
-      availableCategories.splice(randomNumber, 1)
+      const categoryKeys = Object.keys(availableCategories)
+      const randomNumber = Math.floor(Math.random() * categoryKeys.length);
+      const category = categoryKeys[randomNumber];
       categories.push(category)
     }
     return categories;

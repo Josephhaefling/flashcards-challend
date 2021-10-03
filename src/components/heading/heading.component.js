@@ -1,7 +1,7 @@
 import React from 'react';
 import Styled from './heading.styled';
 
-const validLevels = [1, 2, 3, 4, 5];
+const validLevels = [1, 2, 3];
 
 const Heading = ({
   children,

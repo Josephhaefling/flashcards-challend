@@ -67,7 +67,10 @@ const FlashCard = ({ question }) => {
               </Styled.ButtonContainer>
             </Styled.Form>
               ) : (
-                <Styled.QuestionContainer onClick={displayAnswer}>
+                <Styled.QuestionContainer 
+                  data-testid="question container" 
+                  onClick={displayAnswer}
+                >
                   <Styled.TextContainer>
                     <Text>{question.question}</Text>
                   </Styled.TextContainer>

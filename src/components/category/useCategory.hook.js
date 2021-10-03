@@ -27,6 +27,7 @@ export const getRandomCategory = () => {
 
   export const adjustQuestionData = (question) => {
     if (question) {
+      //Todo remove extra properties
       question.answerCorrect = false;
       question.displayAnswer = false;
       question.id = ShortId.generate();

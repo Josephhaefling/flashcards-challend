@@ -23,10 +23,11 @@ import { createCategories, updateGameComplete } from '../../store/actions/index'
 const Game = () => {
   const dispatch = useDispatch();
   const state = store.getState().appState;
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState('random');
   const { gameStarted, gameComplete } = state;
 
   const generateCategories = (categories) => {
+    console.log('categories', categories);
     const allCategories = categories.reduce((categories, category) => {
        categories[category] = { 
         started: false,
@@ -48,7 +49,8 @@ const Game = () => {
 
   useEffect(() => {
     if(state.gameStarted && isEmpty(state.categories)) {
-      const categories = [category] || getRandomCategories(1);
+      const categories = category === 'random' ? getRandomCategories(1) : [category];
+      setCategory(categories);
       generateCategories(categories); 
     }
     if(!isEmpty(state.categories) && !state.gameComplete) {
