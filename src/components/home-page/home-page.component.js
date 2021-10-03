@@ -4,7 +4,7 @@ import React from 'react';
 import Styled from './home-page.styled';
 
 //helpers
-import { availableCategories } from '../../helpers/available-categories';
+import { createOptions } from '../../helpers/helperFunctions';
 import { homePageText } from '../../helpers/page-text';
 
 //components
@@ -21,19 +21,6 @@ import { startGame } from '../../store/actions/index';
 
 const HomePage = ({ setCategory }) => {
   const dispatch = useDispatch();
-  
-  // can this be moved out of the component for performance?
-  const createOptions = () => {
-    const categoryKeys = Object.keys(availableCategories);
-    return categoryKeys.map(category => {
-      return (
-        <option key={category} value={category}>
-          {availableCategories[category]}
-        </option>
-          )
-        }
-      )
-    };
 
     const handleSubmit = () => {
       dispatch(startGame(true, addData));
@@ -58,9 +45,7 @@ const HomePage = ({ setCategory }) => {
           onChange={e => categoryOnChange(e)} 
           onSubmit={handleSubmit} 
         >
-          <Styled.Select data-testid="category select" >
-            {/* this might be bad practice to name a key 'random' here */}
-            <option key="random">Random</option>
+          <Styled.Select data-testid="category select" >            
             {createOptions()}
           </Styled.Select>
           <Styled.ButtonContainer>

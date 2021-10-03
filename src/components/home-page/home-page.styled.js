@@ -9,6 +9,7 @@ const Styled = {
 
   Select: styled.select`
     border-radius: 3px;
+    cursor: pointer;
     font-size: 18px;
     padding: 10px;
     width: 70%;

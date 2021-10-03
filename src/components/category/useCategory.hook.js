@@ -1,26 +1,10 @@
 import ShortId from 'shortid';
-
-const availableCategories = [
-  'artliterature',
-  'language',
-  'sciencenature',
-  'general',
-  'fooddrink',
-  'peopleplaces',
-  'geography',
-  'historyholidays',
-  'entertainment',
-  'toysgames',
-  'music',
-  'mathematics', 
-  'religionmythology',
-  'sportsleisure'
-];
+import { availableCategories } from '../../helpers/available-categories';
 
 export const getRandomCategory = () => {
-    const randomNumber = Math.floor(Math.random() * availableCategories.length);
-    const category = availableCategories[randomNumber];
-    availableCategories.splice(randomNumber, 1)
+    const  categoryKeys = Object.keys(availableCategories);
+    const randomNumber = Math.floor(Math.random() * categoryKeys.length);
+    const category = categoryKeys[randomNumber];
     return category;
   };
 

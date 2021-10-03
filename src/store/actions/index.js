@@ -12,8 +12,7 @@ export const endGame = value => {
   })
 };
 
-// should this be addQuestions instead?
-export const addQuestion = questions => {
+export const addQuestions = questions => {
   return ({
     type: 'ADD_QUESTIONS',
     questions

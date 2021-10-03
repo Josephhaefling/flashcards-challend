@@ -18,7 +18,7 @@ import { connect, useDispatch } from "react-redux"
 import { store } from '../../store';
 import addData from '../../store/reducers/index'
 import { 
-  addQuestion, 
+  addQuestions, 
   updateCategories, 
   updateGameComplete,
   setCurrentQuestion 
@@ -54,7 +54,7 @@ const Category = ({ categoryTitle }) => {
       questions.push(adjustedQuestion);
     } 
     state.categories[category].questions = questions
-    dispatch(addQuestion(state.categories, addData));
+    dispatch(addQuestions(state.categories, addData));
   };
 
   useEffect(() => {

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 const Styled = {
   QuestionContainer: styled.form`
     align-items: center;
+    cursor: pointer;
     display: flex;
     height: 100%;
     justify-content: center;
