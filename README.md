@@ -1,6 +1,6 @@
 # Flashcards
 
-  This application is deployed on heroku: [ArtisTry Heroku.](http://artistry-turing-app.herokuapp.com/)
+  This application is deployed on heroku: [Flashcards.](https://dazzling-nobel-d8149c.netlify.app/)
 
   A flash card game for users to test their knowledge.
 
