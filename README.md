@@ -1,70 +1,50 @@
-# Getting Started with Create React App
+# Flashcards
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+  This application is deployed on heroku: [Flashcards.](https://dazzling-nobel-d8149c.netlify.app/)
 
-## Available Scripts
+  A flash card game for users to test their knowledge.
 
-In the project directory, you can run:
+GitHub: 
 
-### `yarn start`
+- [Flashcards] (https://github.com/Josephhaefling/flashcards-challenge)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This project was bootstrapped with Create React App and uses data retrieved from the [WikiArt API.](https://www.wikiart.org/en/App/GetApi)
+   
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Contributors:
+  - Joe Haefling (GitHub: [Josephhaefling](https://github.com/Josephhaefling))
 
-### `yarn test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+##### Main Page
+Upon loading the application, the user can choose a category or click start for a random category.
 
-### `yarn build`
+<img width="500" alt="Screen Shot 2021-10-03 at 2 41 19 PM" src="https://user-images.githubusercontent.com/45408452/135771380-e3c014dc-febe-4fdb-a2c9-ed4273cd2748.png">
+  
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+##### Question
+Upon clicking the "Start game" button the user will be presented with their first question.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<img width="500" alt="Screen Shot 2021-10-03 at 2 41 27 PM" src="https://user-images.githubusercontent.com/45408452/135771402-b9cf3f65-8a67-4515-8120-afddf1480c70.png">
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+ ##### Answer
+When the user clicks on the question they will see the answer to the question, and have the oportunity to mark their answer as "Correct" or "Incorrect"
 
-### `yarn eject`
+<img width="500" alt="Screen Shot 2021-10-03 at 2 41 30 PM" src="https://user-images.githubusercontent.com/45408452/135771413-9aaff7a8-1a62-411c-9d82-6b58c8640ed5.png">
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+##### Results 
+After the user hasn answered all of their questions, they will see their results for this round. 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+<img width="1440" alt="Screen Shot 2021-10-03 at 2 41 44 PM" src="https://user-images.githubusercontent.com/45408452/135771421-aceba5fc-9a8c-4583-88cc-953992f99105.png">
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Technologies Used
+  - React
+  - React Hooks
+  - React Testing Library / Jest
+  - Express
+  - JavaScript
+  - HTML/CSS
 
-## Learn More
+## Systems/Practices
+  - git/Version Control
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
