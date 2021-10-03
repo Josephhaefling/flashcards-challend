@@ -55,6 +55,13 @@ export const updateScore = value => {
   })
 };
 
+export const resetScore = value => {
+  return ({
+  type: 'RESET_SCORE',
+  value
+  })
+};
+
 export const createCategories = categories => {
   return ({
   type: 'CREATE_CATEGORIES',
@@ -65,6 +72,13 @@ export const createCategories = categories => {
 export const updateGameComplete = value => {
   return ({
   type: 'UPDATE_GAME_COMPLETE',
+  value
+  })
+};
+
+export const clearState = value => {
+  return ({
+  type: 'CLEAR_STATE',
   value
   })
 };

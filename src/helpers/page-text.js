@@ -1,6 +1,6 @@
 export const homePageText = {
   greeting: 'Welcome to Flashcards',
-  chooseCategory: 'Choose a category?',
+  chooseCategory: 'Choose a category',
   buttonText: 'Start game'
 }
 

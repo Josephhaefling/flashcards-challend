@@ -16,19 +16,32 @@ import Text from '../text/text.component';
 import { connect, useDispatch } from "react-redux"
 import { store } from '../../store';
 import addData from '../../store/reducers/index'
-import { updateGameComplete } from '../../store/actions/index';
+import { 
+  addCorrectAnswer,
+  addIncorrectAnswer,
+  resetScore, 
+  startGame,
+  setCurrentQuestion,
+  updateCategories, 
+  updateGameComplete
+} from '../../store/actions/index';
 
 const ScorePage = () => {
   const dispatch = useDispatch();
   const state = store.getState().appState;
   const correctAnswers = state.correctAnswers.length;
   const incorrectAnswers = state.incorrectAnswers.length;
+  const percentCorrect = Math.round((correctAnswers / (incorrectAnswers + correctAnswers)) * 100);
 
-  const getPercentCorrect = () => {
-    const totalQuestions = incorrectAnswers + correctAnswers;
-    console.log('cate',  correctAnswers / totalQuestions)
-  }
-  getPercentCorrect()
+  const onClick = () => {
+    dispatch(addCorrectAnswer([], addData));
+    dispatch(addIncorrectAnswer([], addData));
+    dispatch(setCurrentQuestion({}, addData));
+    dispatch(updateCategories({}, addData));
+    dispatch(updateGameComplete(false, addData));
+    dispatch(resetScore(0, addData));
+    dispatch(startGame(false, addData));
+  };
 
   return (
       <Card>
@@ -36,17 +49,14 @@ const ScorePage = () => {
           <Heading level={1}>Results</Heading>
         </Card.Header>
         <Card.Body>
-          {/* might be better to have str vars here instead or 
-          an object with a bunch of strings instead of 
-          hardcoding the text */}
           <Styled.ResultsContainer>
             <Text>{`${scorePageText.numCorrect}: ${correctAnswers}`}</Text>
-            <Text>{scorePageText.percentCorrect}</Text>
+            <Text>{`${scorePageText.percentCorrect}: ${percentCorrect}%`}</Text>
           </Styled.ResultsContainer>
         </Card.Body>
         <Card.Footer>
           <Text>{scorePageText.playAgain}</Text>
-          <Button label={scorePageText.buttonText}/>
+          <Button label={scorePageText.buttonText} onClick={onClick} />
         </Card.Footer>
       </Card>
   )

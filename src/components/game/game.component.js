@@ -38,8 +38,7 @@ const Game = () => {
     dispatch(createCategories(allCategories, addData));
   };
 
-  // not sure what this naming convention means below??
-  const checkIfComplete = () => {
+  const checkIfGameComplete = () => {
     const categoryKeys = Object.keys(state.categories)
     const inCompleteCategories = (
       categoryKeys.find(category => !state.categories[category].categoryComplete)
@@ -53,15 +52,16 @@ const Game = () => {
       generateCategories(categories); 
     }
     if(!isEmpty(state.categories) && !state.gameComplete) {
-      checkIfComplete()
+      checkIfGameComplete()
     }
-  }, [checkIfComplete, generateCategories]);
-  console.log('cat in game', category)
+  }, [checkIfGameComplete, generateCategories]);
+
   return (
     <Styled.Game>
       {gameStarted && gameComplete && <ScorePage />}
       {gameStarted && !gameComplete && <Category categoryTitle={category} />}
-      {!gameStarted && !gameComplete && <HomePage setCategory={setCategory} />}
+      {!gameStarted && !gameComplete && 
+      <HomePage setCategory={setCategory} />}
     </Styled.Game>
   )
 };

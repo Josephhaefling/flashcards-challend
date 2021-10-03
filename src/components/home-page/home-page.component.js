@@ -18,6 +18,7 @@ import { connect, useDispatch } from "react-redux";
 import { store } from '../../store/index';
 import addData from '../../store/reducers/index'
 import { startGame } from '../../store/actions/index';
+import { set } from 'lodash';
 
 const HomePage = ({ setCategory }) => {
   const dispatch = useDispatch();
@@ -39,7 +40,7 @@ const HomePage = ({ setCategory }) => {
       dispatch(startGame(true, addData));
     }
 
-    const handleChange = (e) => {
+    const categoryOnChange = (e) => {
       setCategory(e.target.value)
     }
 
@@ -54,10 +55,9 @@ const HomePage = ({ setCategory }) => {
         <Text >
           {homePageText.chooseCategory}
         </Text>
-        <Styled.Form onChange={e => handleChange(e)} onSubmit={handleSubmit} >
+        <Styled.Form onChange={e => categoryOnChange(e)} onSubmit={handleSubmit} >
           <Styled.Select>
             {/* this might be bad practice to name a key 'random' here */}
-            <option key="random" value={null} >Random</option>
             {createOptions()}
           </Styled.Select>
           <Styled.ButtonContainer>

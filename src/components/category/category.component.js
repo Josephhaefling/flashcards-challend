@@ -29,7 +29,7 @@ const Category = ({ categoryTitle }) => {
   const state = store.getState().appState;
   const fullCategory = state.categories[categoryTitle];
 
-  const setCurrenctQuestion = () => {
+  const updateCurrentQuestion = () => {
     if (!isEmpty(fullCategory?.questions) && !fullCategory.categoryComplete) {
       const question = fullCategory.questions.pop();
       dispatch(updateCategories(state.categories, addData));
@@ -39,7 +39,7 @@ const Category = ({ categoryTitle }) => {
   }; 
 
   const updateCategoryIsComplete = () => {
-    if(isEmpty(fullCategory.questions) && isEmpty(state.currentQuestion)) {
+    if(isEmpty(fullCategory.questions)) {
       fullCategory.categoryComplete = true;
       dispatch(updateCategories(state.categories, addData));
       dispatch(updateGameComplete(true, addData));
@@ -59,12 +59,11 @@ const Category = ({ categoryTitle }) => {
 
   useEffect(() => {
     if (fullCategory && isEmpty(fullCategory.questions)) {
-      console.log('createQuestions')
       const category = categoryTitle || getRandomCategory();
-      createQuestions(category, 1, 5);
+      createQuestions(category, 1, 6);
     }
     if (isEmpty(state.currentQuestion)) {
-      setCurrenctQuestion();
+      updateCurrentQuestion();
     }
   }, [createQuestions, setCurrentQuestion]);
 

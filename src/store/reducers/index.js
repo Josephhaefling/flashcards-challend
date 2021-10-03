@@ -56,6 +56,13 @@ const appState = (state = game, action) => {
       }
     }
 
+    case 'RESET_SCORE': {
+      return {
+        ...state,
+        score: action.value
+      }
+    }
+
     case 'CREATE_CATEGORIES': {
       return {
         ...state,
@@ -70,6 +77,11 @@ const appState = (state = game, action) => {
       }
     }
 
+    case 'CLEAR_STATE': {
+      return {
+       state: action.value
+      }
+    }
     default: {
       return state
     }

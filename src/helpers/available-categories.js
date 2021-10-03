@@ -1,8 +1,8 @@
 export const availableCategories = {
+  general: 'General',
   artliterature: 'Art & Literature',
   language: 'Language',
   sciencenature: 'Science & Nature',
-  general: 'General',
   fooddrink: 'Food & Drink',
   peopleplaces: 'People & Places',
   geography: 'Geography',

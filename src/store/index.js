@@ -9,8 +9,7 @@ export const game = {
   gameComplete: false,
   gameStarted: false,
   incorrectAnswers: [],
-  score: 0,
-  
+  score: 0,  
 };
 
 const appReducer = combineReducers({
