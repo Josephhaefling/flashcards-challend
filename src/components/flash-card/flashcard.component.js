@@ -53,7 +53,7 @@ const FlashCard = ({ question }) => {
   };
 
   return (
-    <Card id="question-container">
+    <Card data-testid="question-container">
       <Card.Body>
       {
         question.displayAnswer ? (
@@ -68,7 +68,7 @@ const FlashCard = ({ question }) => {
             </Styled.Form>
               ) : (
                 <Styled.QuestionContainer 
-                  data-testid="question container" 
+                  data-testid="question-container" 
                   onClick={displayAnswer}
                 >
                   <Styled.TextContainer>

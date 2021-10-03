@@ -1,6 +1,6 @@
 import React from 'react';
 import HomePage from './home-page.component';
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render, waitFor } from '@testing-library/react';
 import { Provider } from "react-redux";
 import { createStore } from 'redux';
 import { rootReducer } from '../../store/index';
@@ -47,10 +47,12 @@ describe('HomePage', () => {
     expect(getByText('Music')).toBeInTheDocument();
   });
 
-  it.skip('should start game when start game clicked', () => {
+  it('should start game when start game clicked', async () => {
     const { getByText } = homePage;
-    const startButton = getByText('Start game')
+    const startButton = getByText('Start game');
     fireEvent.submit(startButton);
-    expect(handleSubmit).toHaveBeenCalledTimes(1);
+    await setTimeout(() => {
+      expect(getByText('question-container')).toBeInTheDocument();
+    }, 5000)
   });
 });

@@ -42,6 +42,8 @@ const HomePage = ({ setCategory }) => {
           {homePageText.chooseCategory}
         </Text>
         <Styled.Form 
+          data-testid="category-form"
+          name="category-form"
           onChange={e => categoryOnChange(e)} 
           onSubmit={handleSubmit} 
         >

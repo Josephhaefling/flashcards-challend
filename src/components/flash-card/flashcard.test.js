@@ -1,6 +1,6 @@
 import React from 'react';
 import FlashCard from './flashcard.component';
-import { findByText, fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, waitFor } from '@testing-library/react';
 import { Provider } from "react-redux";
 import { createStore } from 'redux';
 import { rootReducer } from '../../store/index';
@@ -34,10 +34,19 @@ describe('FlashCard', () => {
   });
 
   it('should render the answer onclick', async () => {
-    const { getByTestId } = flashcard;
-    const questionContainer = getByTestId('question container');
-    fireEvent.submit(questionContainer);
-    // const answerText = await screen.findByText('What?');
-    expect(displayAnswer).toHaveBeenCalledTimes(1);
-  })
-})
+    const { getByText, getByTestId } = flashcard;
+    setTimeout(() => {
+      const questionContainer = getByTestId('question-container');
+      fireEvent.submit(questionContainer);
+    }, 3000)
+    setTimeout(() => {
+      expect(getByText('What?')).toBeInTheDocument();
+    })
+  });
+
+  it('should display the next question', () => {
+    const { getByText } = flashcard;
+    const question = getByText('Huh?');
+    expect(question).toBeInTheDocument();
+  });
+});
