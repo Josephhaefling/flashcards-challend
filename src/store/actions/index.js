@@ -12,6 +12,7 @@ export const endGame = value => {
   })
 };
 
+// should this be addQuestions instead?
 export const addQuestion = questions => {
   return ({
     type: 'ADD_QUESTIONS',
@@ -58,13 +59,6 @@ export const createCategories = categories => {
   return ({
   type: 'CREATE_CATEGORIES',
   categories
-  })
-};
-
-export const updateCategoryComplete = value => {
-  return ({
-  type: 'UPDATE_CATEGORY_COMPLETE',
-  value
   })
 };
 

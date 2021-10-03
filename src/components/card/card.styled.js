@@ -8,7 +8,8 @@ const Styled = {
     border-radius: 3px;
     display: flex;
     flex-direction: column;
-    height: 50%;
+    height: 50%; // youre using vh in other places, maybe think about which one 
+    // youd like to use for consistency
     justify-content: center;
     width: 70%;
   `,
@@ -19,8 +20,12 @@ const Styled = {
   `, 
 
   Body: styled.div`
-    /* height: 100%; */
-    /* width: 100%; */
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    width: 100%;
   `,
 
   Footer: styled.div`

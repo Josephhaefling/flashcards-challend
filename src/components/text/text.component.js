@@ -1,6 +1,7 @@
 import React from 'react';
 import Styled from './text.styled';
 
+// try not to hardcode colors and use hex codes instead
 const Text = ({ color = 'white', children }) => {
   return (
     <div>

@@ -1,5 +1,3 @@
-import './App.css';
-
 //components
 import Game from './components/game/game.component';
 

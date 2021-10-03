@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
 //components
-import HomePage from '../home-page/home-page';
+import HomePage from '../home-page/home-page.component';
 import Category from '../category/category.component';
 import ScorePage from '../score-page/score-page.component';
+
+//hooks
+import { getRandomCategories } from './useGame';
 
 //lodash
 import { isEmpty } from 'lodash';
@@ -15,37 +18,19 @@ import Styled from './game.styled';
 import { connect, useDispatch } from "react-redux";
 import { store } from '../../store/index';
 import addData from '../../store/reducers/index'
-import { createCategories } from '../../store/actions/index';
-
-const availableCategories = [
-  'artliterature',
-  'language',
-  'sciencenature',
-  'general',
-  'fooddrink',
-  'peopleplaces',
-  'geography',
-  'historyholidays',
-  'entertainment',
-  'toysgames',
-  'music',
-  'mathematics', 
-  'religionmythology',
-  'sportsleisure'
-];
+import { createCategories, updateGameComplete } from '../../store/actions/index';
 
 const Game = () => {
   const dispatch = useDispatch();
   const state = store.getState().appState;
   const [category, setCategory] = useState('');
-
+  const { gameStarted, gameComplete } = state;
 
   const generateCategories = (categories) => {
     const allCategories = categories.reduce((categories, category) => {
        categories[category] = { 
-        correctAnswers: [], 
+        started: false,
         currentQuestion: {}, 
-        inbcorrectAnswers: [], 
         questions: [] 
       };
       return categories;
@@ -53,50 +38,36 @@ const Game = () => {
     dispatch(createCategories(allCategories, addData));
   };
 
-  const getRandomCategories = (number = 1) => {
-    const categories = []
-    for (let i = 0; i < number; i ++) {
-      const randomNumber = Math.floor(Math.random() * availableCategories.length);
-      const category = availableCategories[randomNumber];
-      availableCategories.splice(randomNumber, 1)
-      categories.push(category)
-    }
-    return categories;
-  };
-
-  const getPage = () => {
-    console.log('get page ran')
-    const { gameStarted, gameComplete } = state;
-    if(gameStarted && gameComplete) {
-      return <ScorePage />
-    } else if (gameStarted && !gameComplete) {
-      return <Category category={category} />
-    } else {
-      return  <HomePage setCategory={setCategory} />
-    }
+  // not sure what this naming convention means below??
+  const checkIfComplete = () => {
+    const categoryKeys = Object.keys(state.categories)
+    const inCompleteCategories = (
+      categoryKeys.find(category => !state.categories[category].categoryComplete)
+    );
+    !inCompleteCategories && dispatch(updateGameComplete(true, addData));
   }
-  //Todo
-  //create a function in category that checks of there are any reaming questions
-  //if there are do nothing
-  //if there aren't mark as complete
-
-  //iterate over categories check if all categories are complete if so 
-  //update game complete to true
 
   useEffect(() => {
     if(state.gameStarted && isEmpty(state.categories)) {
-      console.log('the use effect ran')
-      const categories = [category] || getRandomCategories(1)
-      generateCategories(categories);
+      const categories = [category] || getRandomCategories(1);
+      generateCategories(categories); 
     }
-  }, [generateCategories]);
-
+    if(!isEmpty(state.categories) && !state.gameComplete) {
+      checkIfComplete()
+    }
+  }, [checkIfComplete, generateCategories]);
+  console.log('cat in game', category)
   return (
     <Styled.Game>
-      {getPage()}  
+      {gameStarted && gameComplete && <ScorePage />}
+      {gameStarted && !gameComplete && <Category categoryTitle={category} />}
+      {!gameStarted && !gameComplete && <HomePage setCategory={setCategory} />}
     </Styled.Game>
   )
 };
+
+// should this be cleaned up to the following?
+// const mapStateToProps = () => store.getState()
 
 const mapStateToProps = () => {
   return store.getState()

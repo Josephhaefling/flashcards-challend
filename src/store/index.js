@@ -17,6 +17,9 @@ const appReducer = combineReducers({
   appState,
 })
 
+// can this be the following to clean up?
+// export const rootReducer = (state, action) => appReducer(state, action)
+
 export const rootReducer = (state, action) => {
   return appReducer(state, action)
 }

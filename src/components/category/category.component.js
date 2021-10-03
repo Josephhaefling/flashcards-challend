@@ -20,30 +20,30 @@ import addData from '../../store/reducers/index'
 import { 
   addQuestion, 
   updateCategories, 
-  updateCategoryComplete,
   updateGameComplete,
   setCurrentQuestion 
 } from '../../store/actions/index';
 
-const Category = ({ category }) => {
+const Category = ({ categoryTitle }) => {
   const dispatch = useDispatch();
   const state = store.getState().appState;
-  const fullCategory = state.categories[category];
+  const fullCategory = state.categories[categoryTitle];
 
   const setCurrenctQuestion = () => {
-    console.log('full category', fullCategory)
     if (!isEmpty(fullCategory?.questions) && !fullCategory.categoryComplete) {
       const question = fullCategory.questions.pop();
       dispatch(updateCategories(state.categories, addData));
       dispatch(setCurrentQuestion(question, addData));
+      updateCategoryIsComplete()
     }
-    // isEmpty(fullCategory?.questions) && updateCategoryIsComplete()
   }; 
 
   const updateCategoryIsComplete = () => {
-    fullCategory.categoryComplete = true;
-    dispatch(updateCategoryComplete(state.categories, addData));
-    dispatch(updateGameComplete(true, addData));
+    if(isEmpty(fullCategory.questions) && isEmpty(state.currentQuestion)) {
+      fullCategory.categoryComplete = true;
+      dispatch(updateCategories(state.categories, addData));
+      dispatch(updateGameComplete(true, addData));
+    }
   }
 
   const createQuestions = async (category, numCategories, numQuestions) => {
@@ -59,8 +59,9 @@ const Category = ({ category }) => {
 
   useEffect(() => {
     if (fullCategory && isEmpty(fullCategory.questions)) {
-      const categoryTitle = category || getRandomCategory();
-      createQuestions(categoryTitle, 1, 5);
+      console.log('createQuestions')
+      const category = categoryTitle || getRandomCategory();
+      createQuestions(category, 1, 5);
     }
     if (isEmpty(state.currentQuestion)) {
       setCurrenctQuestion();

@@ -1,6 +1,6 @@
 export const availableCategories = {
   artliterature: 'Art & Literature',
-  language: 'language',
+  language: 'Language',
   sciencenature: 'Science & Nature',
   general: 'General',
   fooddrink: 'Food & Drink',

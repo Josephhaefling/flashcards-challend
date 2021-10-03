@@ -63,13 +63,6 @@ const appState = (state = game, action) => {
       }
     }
 
-    case 'UPDATE_CATEGORY_COMPLETE': {
-      return {
-        ...state,
-        categories: action.categories
-      }
-    }
-
     case 'UPDATE_GAME_COMPLETE': {
       return {
         ...state,

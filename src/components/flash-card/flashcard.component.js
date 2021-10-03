@@ -16,7 +16,6 @@ import {
   addCorrectAnswer, 
   addIncorrectAnswer, 
   setCurrentQuestion,
-  updateCategoryComplete,
   updateScore 
 } from '../../store/actions/index';
 
@@ -25,21 +24,21 @@ const FlashCard = ({ question }) => {
   const state = store.getState().appState;
 
 //Evaluates the answer, updates score, and clears current question
-  const onSubmit = (e) => {
+  const onSubmit = () => {
     question.answerCorrect ?
-      dispatchCorrect() :
-      dispatchIncorrect()
+      dispatchCorrectQuestions() :
+      dispatchIncorrectQuestions()
     dispatch(setCurrentQuestion({}, addData));
   };
 
-  const dispatchCorrect = () => {
+  const dispatchCorrectQuestions = () => {
     question.isCorrect = true;
     dispatch(updateScore(question.value, addData));
     dispatch(addCorrectAnswer([question, ...state.correctAnswers], addData));
   };
 
-  const dispatchIncorrect = () => {
-    //Use this in the future to decrease the score jeopordy style
+  const dispatchIncorrectQuestions = () => {
+    //Use this in the future to decrease the score jeopardy style
     // dispatch(updateScore(question.value, addData));
     dispatch(addIncorrectAnswer([question, ...state.incorrectAnswers], addData));
   };
@@ -58,16 +57,20 @@ const FlashCard = ({ question }) => {
       <Card.Body>
       {
         question.displayAnswer ? (
-            <Styled.Form  onSubmit={(e) => onSubmit(e)}>
-              <Text>{question.answer}</Text>
+            <Styled.Form  onSubmit={onSubmit}>
+              <Styled.TextContainer>
+                <Text>{question.answer}</Text>
+              </Styled.TextContainer>
               <Styled.ButtonContainer>
                 <Button onClick={updateCorrectAnswer} label="Correct" />
                 <Button label="Incorrect" />
               </Styled.ButtonContainer>
             </Styled.Form>
               ) : (
-                <Styled.QuestionContainer id="question-container" onClick={displayAnswer}>
-                  <Text>{question.question}</Text>
+                <Styled.QuestionContainer onClick={displayAnswer}>
+                  <Styled.TextContainer>
+                    <Text>{question.question}</Text>
+                  </Styled.TextContainer>
                 </Styled.QuestionContainer>
               )
         }

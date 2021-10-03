@@ -3,11 +3,9 @@ import styled from 'styled-components';
 const Styled = {
   QuestionContainer: styled.form`
     align-items: center;
-    border: 1px solid white;
     display: flex;
     height: 100%;
     justify-content: center;
-    /* padding: 0px 20px; */
     width: 100%;
   `, 
 
@@ -17,13 +15,16 @@ const Styled = {
     width: 35%;
   `,
 
+  TextContainer: styled.div`
+    padding: 30px;
+  `,
+
   Form: styled.form`
     align-items: center;
     display: flex;
     flex-direction: column;
     height: 100%;
     justify-content: center;
-    padding: 0px 20px;
     width: 100%;
   `
 };

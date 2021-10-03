@@ -11,7 +11,6 @@ const Footer = ({ children }) => (
 <Styled.Footer>{children}</Styled.Footer>
 );
 
-
 const Card = ({ children }) => {
   return (
     <Styled.Card>
