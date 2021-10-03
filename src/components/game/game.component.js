@@ -68,11 +68,6 @@ const Game = () => {
   )
 };
 
-// should this be cleaned up to the following?
-// const mapStateToProps = () => store.getState()
-
-const mapStateToProps = () => {
-  return store.getState()
-}
+const mapStateToProps = () => store.getState()
 
 export default connect(mapStateToProps)(Game);

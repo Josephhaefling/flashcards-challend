@@ -8,16 +8,12 @@ const Styled = {
     border-radius: 3px;
     display: flex;
     flex-direction: column;
-    height: 50%; // youre using vh in other places, maybe think about which one 
-    // youd like to use for consistency
+    height: 50%;
     justify-content: center;
     width: 70%;
   `,
 
-  Header: styled.div`
-    /* height: 100%; */
-    /* width: 100%; */
-  `, 
+  Header: styled.div``, 
 
   Body: styled.div`
     align-items: center;
