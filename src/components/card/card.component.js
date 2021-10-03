@@ -2,18 +2,18 @@ import React from 'react';
 import Styled from './card.styled';
 
 const Header = ({ children }) => (
-  <Styled.Header>{children}</Styled.Header>
+  <Styled.Header data-testid="header">{children}</Styled.Header>
 );
 const Body = ({ children }) => (
-    <Styled.Body>{children}</Styled.Body>
+    <Styled.Body data-testid="body">{children}</Styled.Body>
 );
 const Footer = ({ children }) => (
-<Styled.Footer>{children}</Styled.Footer>
+<Styled.Footer data-testid="footer">{children}</Styled.Footer>
 );
 
 const Card = ({ children }) => {
   return (
-    <Styled.Card>
+    <Styled.Card data-testid="card">
       {(children)}
     </Styled.Card>
   )

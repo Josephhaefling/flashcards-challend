@@ -12,7 +12,7 @@ export const game = {
   score: 0,  
 };
 
-const appReducer = combineReducers({
+export const appReducer = combineReducers({
   appState,
 })
 
